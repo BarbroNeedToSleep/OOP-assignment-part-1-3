@@ -10,8 +10,10 @@ public class Main {
 
     Person lina = new Person("Lina", "Katt", "lina@exempel.se");
     Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se");
+    Person jon = new Person("Jon", "Jonsson", "jon@exemle.se");
 
     System.out.println(lina.getSummary());
+    System.out.println(jon.getSummary());
     System.out.println(alfred.getSummary()+"\n");
 
     TodoItem tire = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-07-08"), lina);
@@ -22,6 +24,12 @@ public class Main {
 
     System.out.println(tire.getOverdueInfo());
     System.out.println(windshield.getOverdueInfo()+"\n");
+
+    TodoItemTask fixTire = new TodoItemTask(tire, jon);
+    TodoItemTask fixWindshield = new TodoItemTask(windshield, jon);
+
+    System.out.println(fixTire.getSummary());
+    System.out.println(fixWindshield.getSummary()+"\n");
 
     }
 
