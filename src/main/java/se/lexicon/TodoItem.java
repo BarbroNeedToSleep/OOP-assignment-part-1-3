@@ -89,4 +89,37 @@ public class TodoItem {
 
         this.creator = creator;
     }
+
+    public boolean isOverdue(LocalDate deadLine){
+        if (deadLine.isBefore(LocalDate.now())){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public String getOverdueInfo(){
+
+        StringBuilder info = new StringBuilder();
+        info.append("Job: ").append(title)
+                .append(", Id number: ").append(ID)
+                .append(" Overdue: ").append(done ? "Yes" : "No");
+
+        return info.toString();
+    }
+
+    public String getSummary(){
+
+        StringBuilder info = new StringBuilder();
+        info.append("Booking information -  Id number: ").append(ID)
+                .append(", Job : ").append(title)
+                .append(", Job description: ").append(taskDescription)
+                .append(", Due date: ").append(deadLine)
+                .append(", Done: ").append(done ? "Yes" : "No")
+                .append(", Customer ").append(creator.getSummary());
+
+
+        return info.toString();
+    }
 }
