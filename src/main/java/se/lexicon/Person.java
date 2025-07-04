@@ -18,31 +18,23 @@ public class Person {
 
     public void setFirstName(String firstName){
 
-        if (firstName == null){
-            throw new IllegalArgumentException("First name cannot be null");
+        if (firstName == null|| firstName.trim().isEmpty()){
+            throw new IllegalArgumentException("First name cannot be null null or empty");
         }
 
         this.firstName = firstName;
     }
 
-//    public void setFirstName(String firstName){
-//
-//        if (firstName == null || firstName.trim().isEmpty()){
-//            throw new IllegalArgumentException("First name cannot be null or empty");
-//        }
-//       this.firstName = firstName;
-//    }
-
     public void setLastName(String lastName){
-        if (lastName == null){
-            throw new IllegalArgumentException("Last name cannot be null");
+        if (lastName == null || firstName.trim().isEmpty()){
+            throw new IllegalArgumentException("Last name cannot be null or empty");
         }
         this.lastName = lastName;
     }
 
     public void setEmail(String email){
-        if (email == null){
-            throw new IllegalArgumentException("Email cannot be null");
+        if (email == null || firstName.trim().isEmpty()){
+            throw new IllegalArgumentException("Email cannot be null or empty");
         }
         this.email = email;
     }
