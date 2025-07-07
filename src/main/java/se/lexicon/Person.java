@@ -42,10 +42,13 @@ public class Person {
     }
 
 
-    //Getters
+
+
+
+    // Getters
 
     public int getNextId() {
-        return++personIdCounter;
+        return ++personIdCounter;
     }
 
     public String getFirstName() {
@@ -67,5 +70,15 @@ public class Person {
                 .append(" ").append(lastName)
                 .append(", Email : ").append(email);
         return summery.toString();
+    }
+
+    // Testing Utilities
+
+    public int getID (){
+        return ID;
+    }
+
+    public static void resetIdCounterForTesting() {
+        personIdCounter = 0;
     }
 }
