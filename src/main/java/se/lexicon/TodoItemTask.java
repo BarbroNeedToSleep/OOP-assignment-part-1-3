@@ -24,7 +24,7 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
 
     //Getter
 
-    public int getID(){
+    public int getItemTaskID(){
         return ID;
     }
 
@@ -49,7 +49,9 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
 
 
     private void setAssigned() {
-        this.assigned = this.assignee != null;
+
+    this.assigned = this.assignee != null;
+
     }
 
     public void setAssignee(Person assignee) {
@@ -58,7 +60,12 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
     }
 
      public void setTodoItem(TodoItem todoItem) {
-            this.todoItem = todoItem;
+
+         if (todoItem == null) {
+             throw new IllegalArgumentException("TodoItem cannot be null");
+         }
+
+    this.todoItem = todoItem;
      }
 
     public String getSummary(){
@@ -67,6 +74,13 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
                 .append(", Task: ").append(todoItem.getSummary())
                 .append(", Is assigned to ").append(assignee.getSummary());
         return summery.toString();
+    }
+
+    // Testing Utilities
+
+
+    public static void resetIdCounterForTesting() {
+        itemTaskID  = 0;
     }
 
 
