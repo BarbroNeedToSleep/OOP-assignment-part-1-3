@@ -26,7 +26,7 @@ public class PersonTest {
     @Test
     void setFirstNameWithString(){
 
-        // Scenario: A string value entry in the setFirstName method that is a valid unput.
+        // Scenario: A string value entry in the setFirstName method that is a valid input.
 
             String actualValue = person.getFirstName();
 

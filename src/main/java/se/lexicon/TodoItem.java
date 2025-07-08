@@ -62,6 +62,10 @@ public class TodoItem {
 
     public void setTaskDescription(String taskDescription) {
 
+        if (taskDescription == null || taskDescription.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
+
         this.taskDescription = taskDescription;
     }
 
@@ -90,13 +94,8 @@ public class TodoItem {
         this.creator = creator;
     }
 
-    public boolean isOverdue(LocalDate deadLine){
-        if (deadLine.isBefore(LocalDate.now())){
-            return true;
-        } else {
-            return false;
-        }
-
+    public boolean isOverdue() {
+        return deadLine.isBefore(LocalDate.now());
     }
 
     public String getOverdueInfo(){
@@ -121,5 +120,15 @@ public class TodoItem {
 
 
         return info.toString();
+    }
+
+    // Testing Utilities
+
+    public int getID (){
+        return ID;
+    }
+
+    public static void resetIdCounterForTesting() {
+        itemID  = 0;
     }
 }
