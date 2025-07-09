@@ -8,12 +8,14 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+    private AppUser credentials;
 
-    public Person(String firstName, String lastName, String email){
+    public Person(String firstName, String lastName, String email, AppUser credentials){
         this.ID = getNextId();
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
+        setCredentials(credentials);
     }
 
     //Setters
@@ -41,9 +43,13 @@ public class Person {
         this.email = email;
     }
 
+    public void setCredentials(AppUser credentials) {
 
-
-
+        if (credentials == null){
+            throw new IllegalArgumentException("Credentials cannot be null");
+        }
+        this.credentials = credentials;
+    }
 
     // Getters
 
@@ -63,14 +69,39 @@ public class Person {
         return email;
     }
 
-    public String getSummary(){
-        StringBuilder summery = new StringBuilder();
-        summery.append("Person Info- ID: ").append(ID)
+    public AppUser getCredentials() {
+        return credentials;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder summary = new StringBuilder();
+        summary.append("Person Info- ID: ").append(ID)
                 .append(", Name: ").append(firstName)
                 .append(" ").append(lastName)
                 .append(", Email : ").append(email);
-        return summery.toString();
+        return summary.toString();
+
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Person person = (Person) obj;
+
+        return firstName.equals(person.firstName) && lastName.equals(person.lastName) && email.equals(person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + email.hashCode();
+        return result;
+    }
+
 
     // Testing Utilities
 

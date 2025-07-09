@@ -55,6 +55,11 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
     }
 
     public void setAssignee(Person assignee) {
+
+        if (assignee == null) {
+            throw new IllegalArgumentException("Assignee cannot be null");
+        }
+
         this.assignee = assignee;
         setAssigned();
     }
@@ -68,12 +73,34 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
     this.todoItem = todoItem;
      }
 
-    public String getSummary(){
-        StringBuilder summery = new StringBuilder();
-        summery.append("Task ID: ").append(ID)
-                .append(", Task: ").append(todoItem.getSummary())
-                .append(", Is assigned to ").append(assignee.getSummary());
-        return summery.toString();
+     @Override
+    public String toString(){
+        StringBuilder summary = new StringBuilder();
+        summary.append("Task ID: ").append(ID)
+                .append(", Task: ").append(todoItem.toString())
+                .append(", Is assigned to ").append(assignee.getFirstName());
+        return summary.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        TodoItemTask other = (TodoItemTask) obj;
+
+        if (ID != other.ID) return false;
+        if (assigned != other.assigned) return false;
+        return todoItem != null ? todoItem.equals(other.todoItem) : other.todoItem == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ID;
+        result = 31 * result + (assigned ? 1 : 0);
+        result = 31 * result + (todoItem != null ? todoItem.hashCode() : 0);
+        // Exclude assignee
+        return result;
     }
 
     // Testing Utilities

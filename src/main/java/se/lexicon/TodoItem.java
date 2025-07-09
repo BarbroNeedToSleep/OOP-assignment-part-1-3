@@ -108,7 +108,8 @@ public class TodoItem {
         return info.toString();
     }
 
-    public String getSummary(){
+    @Override
+    public String toString(){
 
         StringBuilder info = new StringBuilder();
         info.append("Booking information -  Id number: ").append(ID)
@@ -116,11 +117,33 @@ public class TodoItem {
                 .append(", Job description: ").append(taskDescription)
                 .append(", Due date: ").append(deadLine)
                 .append(", Done: ").append(done ? "Yes" : "No")
-                .append(", Customer ").append(creator.getSummary());
+                .append(", Customer ").append(creator.getFirstName());
 
 
         return info.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        TodoItem todoItem = (TodoItem) obj;
+
+        return done == todoItem.done && title.equals(todoItem.title) && taskDescription.equals(todoItem.taskDescription) && deadLine.equals(todoItem.deadLine);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + taskDescription.hashCode();
+        result = 31 * result + deadLine.hashCode();
+        result = 31 * result + Boolean.hashCode(done);
+        return result;
+    }
+
+
+
 
     // Testing Utilities
 
