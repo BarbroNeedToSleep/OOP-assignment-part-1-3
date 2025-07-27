@@ -9,7 +9,7 @@ public class Main {
 
 
     Person lina = new Person("Lina", "Katt", "lina@exempel.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
-    Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se", new AppUser("Akfred", "1abc", AppRole.ROLE_APP_USER));
+    Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
     Person jon = new Person("Jon", "Jonsson", "jon@exemle.se", new AppUser("Jon", "13399", AppRole.ROLE_APP_USER));
 
     System.out.println(lina);

@@ -11,7 +11,7 @@ public class PersonTest {
     @BeforeEach
     public void setup() {
         Person.resetIdCounterForTesting();
-        person = new Person("Lina", "Katt", "lina@example.se");
+        person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
     }
 
     @Test
@@ -152,7 +152,7 @@ public class PersonTest {
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se");
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "321", AppRole.ROLE_APP_USER));
 
         int expected02 = 2;
 
@@ -170,7 +170,7 @@ public class PersonTest {
         int id = person.getID();
         String expected = "Person Info- ID: " + id + ", Name: Lina Katt, Email : lina@example.se";
 
-        String actual = person.getSummary();
+        String actual = person.toString();
 
         Assertions.assertEquals(expected, actual, "Summary should match expected format and content");
     }

@@ -17,7 +17,7 @@ public class TodoItemTaskTest {
         TodoItem.resetIdCounterForTesting();
         Person.resetIdCounterForTesting();
         TodoItemTask.resetIdCounterForTesting();
-        person = new Person("jon", "Jonsson", "jon@test.se");
+        person = new Person("jon", "Jonsson", "jon@test.se", new AppUser("Jon", "13399", AppRole.ROLE_APP_USER));
         todoItem = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-09-30"), person);
         todoItemTask = new TodoItemTask(todoItem, person);
     }
@@ -33,7 +33,7 @@ public class TodoItemTaskTest {
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se");
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
         TodoItem secondTodo = new TodoItem("Buff the car", "Jump on the car", LocalDate.parse("2025-10-30"), personTest01);
         TodoItemTask todoItemTask01= new TodoItemTask(secondTodo , personTest01);
 
@@ -50,7 +50,7 @@ public class TodoItemTaskTest {
 
         //Scenario: Assignee should be changed and the assigned boolean should be changed to true
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se");
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
 
 
         todoItemTask.setAssignee(personTest01);
@@ -101,10 +101,10 @@ public class TodoItemTaskTest {
 
         int id = todoItemTask.getItemTaskID();
         String expected = "Task ID: " + id
-                + ", Task: " + todoItem.getSummary()
-                + ", Is assigned to " + person.getSummary();
+                + ", Task: " + todoItem.toString()
+                + ", Is assigned to " + person.toString();
 
-        String actual = todoItemTask.getSummary();
+        String actual = todoItemTask.toString();
         Assertions.assertEquals(expected, actual, "Summary should match expected format and content");
     }
 

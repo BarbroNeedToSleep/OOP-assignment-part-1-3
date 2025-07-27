@@ -15,7 +15,7 @@ public class TodoItemTest {
     public void setup() {
         TodoItem.resetIdCounterForTesting();
         Person.resetIdCounterForTesting();
-        person = new Person("Lina", "Katt", "lina@example.se");
+        person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
         todoItem = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-09-30"), person);
     }
 
@@ -168,7 +168,7 @@ public class TodoItemTest {
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se");
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
         TodoItem secondTodo = new TodoItem("Buff the car", "Jump on the car", LocalDate.parse("2025-10-30"), personTest01);
 
         int expected02 = 2;
@@ -186,14 +186,14 @@ public class TodoItemTest {
 
         todoItem.setDone(true);
 
-        String summary = todoItem.getSummary();
+        String summary = todoItem.toString();
 
         String expected = "Booking information -  Id number: " + todoItem.getID()
                 + ", Job : Change tire"
                 + ", Job description: Change both tires on the front"
                 + ", Due date: 2025-09-30"
                 + ", Done: Yes"
-                + ", Customer " + person.getSummary();
+                + ", Customer " + person.toString();
 
         Assertions.assertEquals(expected, summary);
     }
