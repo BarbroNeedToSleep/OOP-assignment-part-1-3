@@ -160,7 +160,7 @@ public class TodoItemTest {
     @Test
     void getIDCountsAsExpectedTest (){
 
-        //Scenario: The value of ID counts up when a new TodioItem is created
+        //Scenario: The value of ID counts up when a new TodoItem is created
 
         int expected = 1;
 
