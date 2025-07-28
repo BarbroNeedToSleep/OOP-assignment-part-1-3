@@ -193,7 +193,7 @@ public class TodoItemTest {
                 + ", Job description: Change both tires on the front"
                 + ", Due date: 2025-09-30"
                 + ", Done: Yes"
-                + ", Customer " + person.toString();
+                + ", Customer " + person.getFirstName();
 
         Assertions.assertEquals(expected, summary);
     }

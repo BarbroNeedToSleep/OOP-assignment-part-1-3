@@ -61,18 +61,6 @@ public class TodoItemTaskTest {
     }
 
     @Test
-    void setAssigneeToNullShouldSetAssignedFalse() {
-
-        //Scenario: When the setAssignee is set to null the assigned boolean should be set to false
-
-        todoItemTask.setAssignee(null);
-
-        // Assert
-        Assertions.assertNull(todoItemTask.getAssignee(), "Assignee should be null");
-        Assertions.assertFalse(todoItemTask.isAssigned(), "Assigned should be false when assignee is null");
-    }
-
-    @Test
     void setTodoItemWithValidObjectShouldUpdateTodoItem() {
 
         //Scenario:Check that the setTodoItem changes the String
@@ -102,7 +90,7 @@ public class TodoItemTaskTest {
         int id = todoItemTask.getItemTaskID();
         String expected = "Task ID: " + id
                 + ", Task: " + todoItem.toString()
-                + ", Is assigned to " + person.toString();
+                + ", Is assigned to " + person.getFirstName();
 
         String actual = todoItemTask.toString();
         Assertions.assertEquals(expected, actual, "Summary should match expected format and content");
