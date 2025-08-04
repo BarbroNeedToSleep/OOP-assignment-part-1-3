@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.idSequencer.PersonIdSequencer;
 import se.lexicon.idSequencer.ToDoItemIdSequencer;
+import se.lexicon.idSequencer.ToDoItemTaskIdSequencer;
 
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public class TodoItemTaskTest {
     public void setup() {
         ToDoItemIdSequencer.getInstance().reset();
         PersonIdSequencer.getInstance().reset();
-        TodoItemTask.resetIdCounterForTesting();
+        ToDoItemTaskIdSequencer.getInstance().reset();
         person = new Person("jon", "Jonsson", "jon@test.se", new AppUser("Jon", "13399", AppRole.ROLE_APP_USER));
         todoItem = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-09-30"), person);
         todoItemTask = new TodoItemTask(todoItem, person);
@@ -31,7 +32,7 @@ public class TodoItemTaskTest {
 
         int expected = 1;
 
-        int actualValue = todoItemTask.getItemTaskID();
+        int actualValue = todoItemTask.getId();
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
@@ -41,7 +42,7 @@ public class TodoItemTaskTest {
 
         int expected02 = 2;
 
-        int actualValue02 = todoItemTask01.getItemTaskID();
+        int actualValue02 = todoItemTask01.getId();
 
         Assertions.assertEquals(expected02, actualValue02, "The maximum value should be 2");
 
@@ -89,13 +90,21 @@ public class TodoItemTaskTest {
 
         //Scenario: Return the value of the summery for the todoItemTask, the todoItem and the Person assigned to the task
 
-        int id = todoItemTask.getItemTaskID();
+        int id = todoItemTask.getId();
         String expected = "Task ID: " + id
                 + ", Task: " + todoItem.toString()
                 + ", Is assigned to " + person.getFirstName();
 
         String actual = todoItemTask.toString();
         Assertions.assertEquals(expected, actual, "Summary should match expected format and content");
+    }
+
+    @Test
+    void twoTasksWithSameDataButDifferentIdsShouldNotBeEqual() {
+        TodoItemTask task1 = new TodoItemTask(todoItem, person);
+        TodoItemTask task2 = new TodoItemTask(todoItem, person);
+
+        Assertions.assertNotEquals(task1, task2, "Each task should be unique by ID even if data matches");
     }
 
 

@@ -1,20 +1,21 @@
 package se.lexicon;
 
 
-
+import se.lexicon.idSequencer.ToDoItemIdSequencer;
+import se.lexicon.idSequencer.ToDoItemTaskIdSequencer;
 
 public class TodoItemTask {
 
-    private  static int itemTaskID =0;
+//    private  static int itemTaskID =0;
 
-    private int ID;
+    private int id;
     private boolean assigned;
     private TodoItem todoItem;
     private Person assignee;
 
 public TodoItemTask(TodoItem todoItem, Person assignee){
 
-    this.ID = getNextItemTaskID();
+    this.id = ToDoItemTaskIdSequencer.getInstance().nextId();
     this.todoItem = todoItem;
     setAssignee(assignee);
 
@@ -23,14 +24,6 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
 
 
     //Getter
-
-    public int getItemTaskID(){
-        return ID;
-    }
-
-    private int getNextItemTaskID(){
-        return ++itemTaskID;
-    }
 
     public boolean isAssigned(){
         return assigned;
@@ -76,7 +69,7 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
      @Override
     public String toString(){
         StringBuilder summary = new StringBuilder();
-        summary.append("Task ID: ").append(ID)
+        summary.append("Task ID: ").append(id)
                 .append(", Task: ").append(todoItem.toString())
                 .append(", Is assigned to ").append(assignee.getFirstName());
         return summary.toString();
@@ -89,14 +82,14 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
 
         TodoItemTask other = (TodoItemTask) obj;
 
-        if (ID != other.ID) return false;
+        if (id != other.id) return false;
         if (assigned != other.assigned) return false;
         return todoItem != null ? todoItem.equals(other.todoItem) : other.todoItem == null;
     }
 
     @Override
     public int hashCode() {
-        int result = ID;
+        int result = id;
         result = 31 * result + (assigned ? 1 : 0);
         result = 31 * result + (todoItem != null ? todoItem.hashCode() : 0);
         // Exclude assignee
@@ -106,8 +99,8 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
     // Testing Utilities
 
 
-    public static void resetIdCounterForTesting() {
-        itemTaskID  = 0;
+    public int getId (){
+        return id;
     }
 
 

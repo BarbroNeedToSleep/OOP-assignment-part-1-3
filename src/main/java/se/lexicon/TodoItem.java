@@ -151,7 +151,4 @@ public class TodoItem {
         return id;
     }
 
-//    public static void resetIdCounterForTesting() {
-//        itemId  = 0;
-//    }
 }
