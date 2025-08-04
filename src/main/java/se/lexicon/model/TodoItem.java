@@ -1,6 +1,5 @@
-package se.lexicon;
+package se.lexicon.model;
 
-import se.lexicon.idSequencer.PersonIdSequencer;
 import se.lexicon.idSequencer.ToDoItemIdSequencer;
 
 import java.time.LocalDate;

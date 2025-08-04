@@ -1,7 +1,6 @@
-package se.lexicon;
+package se.lexicon.model;
 
 
-import se.lexicon.idSequencer.ToDoItemIdSequencer;
 import se.lexicon.idSequencer.ToDoItemTaskIdSequencer;
 
 public class TodoItemTask {

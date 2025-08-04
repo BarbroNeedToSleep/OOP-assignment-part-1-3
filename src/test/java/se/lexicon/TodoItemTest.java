@@ -3,8 +3,12 @@ package se.lexicon;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.lexicon.appUserDAO.AppRole;
+import se.lexicon.appUserDAO.AppUser;
 import se.lexicon.idSequencer.PersonIdSequencer;
 import se.lexicon.idSequencer.ToDoItemIdSequencer;
+import se.lexicon.model.Person;
+import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
 

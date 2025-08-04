@@ -1,5 +1,6 @@
-package se.lexicon;
+package se.lexicon.model;
 
+import se.lexicon.appUserDAO.AppUser;
 import se.lexicon.idSequencer.PersonIdSequencer;
 
 public class Person {
