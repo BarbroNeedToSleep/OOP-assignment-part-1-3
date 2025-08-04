@@ -1,8 +1,8 @@
 package se.lexicon;
 
 
-import se.lexicon.appUserDAO.AppRole;
-import se.lexicon.appUserDAO.AppUser;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 import se.lexicon.model.TodoItemTask;
@@ -14,16 +14,16 @@ public class Main {
     public static void main(String[] args) {
 
 
-    Person lina = new Person("Lina", "Katt", "lina@exempel.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
-    Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
-    Person jon = new Person("Jon", "Jonsson", "jon@exemle.se", new AppUser("Jon", "13399", AppRole.ROLE_APP_USER));
+    Person lina = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER));
+    Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se", AppUser.getInstance("Alfred", "1abc", AppRole.ROLE_APP_USER));
+    Person jon = new Person("Jon", "Jonsson", "jon@exemle.se", AppUser.getInstance("Jon", "13399", AppRole.ROLE_APP_USER));
 
     System.out.println(lina);
     System.out.println(jon);
     System.out.println(alfred +"\n");
 
-    Person p1 = new Person("Lina", "Katt", "lina@exempel.se", new AppUser("l", "2", AppRole.ROLE_APP_USER));
-    Person p2 = new Person("Lina", "Katt", "lina@exempel.se", new AppUser("l", "3", AppRole.ROLE_APP_USER));
+    Person p1 = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("l", "2", AppRole.ROLE_APP_USER));
+    Person p2 = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("k", "3", AppRole.ROLE_APP_USER));
 
     System.out.println(p1.equals(p2));
 
@@ -36,7 +36,7 @@ public class Main {
     System.out.println(tire.getOverdueInfo());
     System.out.println(windshield.getOverdueInfo()+"\n");
 
-    Person creator = new Person("Lina", "Katt", "lina@exempel.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+    Person creator = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("Lina01", "123", AppRole.ROLE_APP_USER));
 
     TodoItem item1 = new TodoItem("Clean", "Clean the garage", LocalDate.now().plusDays(2), creator);
     TodoItem item2 = new TodoItem("Clean", "Clean the garage", LocalDate.now().plusDays(2), creator);
@@ -51,19 +51,17 @@ public class Main {
     System.out.println(fixTire);
     System.out.println(fixWindshield +"\n");
 
-    AppUser barbro = new AppUser("NtS","321", AppRole.ROLE_APP_USER);
+    AppUser barbro = AppUser.getInstance("NtS","321", AppRole.ROLE_APP_USER);
     System.out.println(barbro.toString());
 
-    AppUser user1 = new AppUser("Alice", "pass123", AppRole.ROLE_APP_USER);
-    AppUser user2 = new AppUser("Alice", "diffPass", AppRole.ROLE_APP_USER);
-    AppUser user3 = new AppUser("Bob", "bobPass", AppRole.ROLE_APP_ADMIN);
+    AppUser user1 = AppUser.getInstance("Alice", "pass123", AppRole.ROLE_APP_USER);
+    AppUser user2 = AppUser.getInstance("Alice01", "diffPass", AppRole.ROLE_APP_USER);
+    AppUser user3 = AppUser.getInstance("Bob", "bobPass", AppRole.ROLE_APP_ADMIN);
 
 
     System.out.println("user1: " + user1);
     System.out.println("user3: " + user3);
 
-
-    System.out.println("user1 equals user2? " + user1.equals(user2)); // true (same name & role)
         System.out.println("user1 equals user3? " + user1.equals(user3)); // false
 
     }

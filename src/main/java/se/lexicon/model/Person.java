@@ -1,6 +1,5 @@
 package se.lexicon.model;
 
-import se.lexicon.appUserDAO.AppUser;
 import se.lexicon.idSequencer.PersonIdSequencer;
 
 public class Person {
@@ -94,6 +93,7 @@ public class Person {
     @Override
     public int hashCode() {
         return Integer.hashCode(id);
+
     }
 
 

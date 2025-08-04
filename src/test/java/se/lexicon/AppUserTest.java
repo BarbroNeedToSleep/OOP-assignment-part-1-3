@@ -1,10 +1,11 @@
 package se.lexicon;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.lexicon.appUserDAO.AppRole;
-import se.lexicon.appUserDAO.AppUser;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
 
 public class AppUserTest {
 
@@ -14,8 +15,13 @@ public class AppUserTest {
     @BeforeEach
     public void setup(){
 
-        appUser =  new AppUser("Lina", "123", AppRole.ROLE_APP_USER);
+        appUser =  AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER);
 
+    }
+
+    @AfterEach
+    public void tearDown() {
+        AppUser.clearInstances();
     }
 
     @Test
@@ -43,7 +49,12 @@ public class AppUserTest {
         Assertions.assertEquals(AppRole.ROLE_APP_USER, appUser.getRole());
     }
 
-
+    @Test
+    public void testDuplicateAppUserThrowsException() {
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            AppUser.getInstance("Lina", "newpass", AppRole.ROLE_APP_ADMIN);
+        });
+    }
 
 
 

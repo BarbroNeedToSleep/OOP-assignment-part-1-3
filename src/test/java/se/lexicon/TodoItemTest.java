@@ -3,8 +3,8 @@ package se.lexicon;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.lexicon.appUserDAO.AppRole;
-import se.lexicon.appUserDAO.AppUser;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
 import se.lexicon.idSequencer.PersonIdSequencer;
 import se.lexicon.idSequencer.ToDoItemIdSequencer;
 import se.lexicon.model.Person;
@@ -21,7 +21,7 @@ public class TodoItemTest {
     public void setup() {
         ToDoItemIdSequencer.getInstance().reset();
         PersonIdSequencer.getInstance().reset();
-        person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+        person = new Person("Lina", "Katt", "lina@example.se", AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER));
         todoItem = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-09-30"), person);
     }
 
@@ -174,7 +174,7 @@ public class TodoItemTest {
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "1abc", AppRole.ROLE_APP_USER));
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", AppUser.getInstance("Alfred", "1abc", AppRole.ROLE_APP_USER));
         TodoItem secondTodo = new TodoItem("Buff the car", "Jump on the car", LocalDate.parse("2025-10-30"), personTest01);
 
         int expected02 = 2;

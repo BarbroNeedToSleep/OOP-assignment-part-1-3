@@ -1,10 +1,11 @@
 package se.lexicon;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.lexicon.appUserDAO.AppRole;
-import se.lexicon.appUserDAO.AppUser;
+import se.lexicon.model.AppRole;
+import se.lexicon.model.AppUser;
 import se.lexicon.idSequencer.PersonIdSequencer;
 import se.lexicon.model.Person;
 
@@ -16,7 +17,12 @@ public class PersonTest {
     public void setup() {
 
         PersonIdSequencer.getInstance().reset();
-        person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+        person = new Person("Lina", "Katt", "lina@example.se", AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        AppUser.clearInstances();
     }
 
     @Test
@@ -157,7 +163,7 @@ public class PersonTest {
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
-        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", new AppUser("Alfred", "321", AppRole.ROLE_APP_USER));
+        Person personTest01 = new Person("Alfred", "Katt", "alfred@example.se", AppUser.getInstance("Alfred", "321", AppRole.ROLE_APP_USER));
 
         int expected02 = 2;
 
@@ -182,9 +188,12 @@ public class PersonTest {
 
     @Test
     void twoPersonsWithSameDataButDifferentIdsShouldNotBeEqual() {
-        Person person1 = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
-        Person person2 = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+        Person person1 = new Person("Lina", "Katt", "lina@example.se", AppUser.getInstance("Lina01", "123", AppRole.ROLE_APP_USER));
+        Person person2 = new Person("Lina", "Katt", "lina@example.se", AppUser.getInstance("Lina02", "123", AppRole.ROLE_APP_USER));
 
+        System.out.println("person1 ID = " + person1.getId());
+        System.out.println("person2 ID = " + person2.getId());
+        System.out.println(person1.getCredentials() == person2.getCredentials());  // Should print: true
         Assertions.assertNotEquals(person1, person2, "Persons with same data but different IDs should not be equal");
     }
 
