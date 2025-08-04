@@ -3,6 +3,7 @@ package se.lexicon;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.lexicon.idSequencer.PersonIdSequencer;
 
 public class PersonTest {
 
@@ -10,7 +11,10 @@ public class PersonTest {
 
     @BeforeEach
     public void setup() {
-        Person.resetIdCounterForTesting();
+
+        PersonIdSequencer.getInstance().reset();
+
+
         person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
     }
 

@@ -1,17 +1,18 @@
 package se.lexicon;
 
+import se.lexicon.idSequencer.PersonIdSequencer;
+
 public class Person {
 
-    private static int personIdCounter = 0;
 
-    private int ID;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private AppUser credentials;
 
     public Person(String firstName, String lastName, String email, AppUser credentials){
-        this.ID = getNextId();
+        this.id = PersonIdSequencer.getInstance().nextId();
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
@@ -51,12 +52,6 @@ public class Person {
         this.credentials = credentials;
     }
 
-    // Getters
-
-    public int getNextId() {
-        return ++personIdCounter;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -76,7 +71,7 @@ public class Person {
     @Override
     public String toString(){
         StringBuilder summary = new StringBuilder();
-        summary.append("Person Info- ID: ").append(ID)
+        summary.append("Person Info- ID: ").append(id)
                 .append(", Name: ").append(firstName)
                 .append(" ").append(lastName)
                 .append(", Email : ").append(email);
@@ -106,10 +101,7 @@ public class Person {
     // Testing Utilities
 
     public int getID (){
-        return ID;
+        return id;
     }
 
-    public static void resetIdCounterForTesting() {
-        personIdCounter = 0;
-    }
 }
