@@ -177,6 +177,14 @@ public class PersonTest {
         Assertions.assertEquals(expected, actual, "Summary should match expected format and content");
     }
 
+    @Test
+    void twoPersonsWithSameDataButDifferentIdsShouldNotBeEqual() {
+        Person person1 = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+        Person person2 = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
+
+        Assertions.assertNotEquals(person1, person2, "Persons with same data but different IDs should not be equal");
+    }
+
 
 }
 

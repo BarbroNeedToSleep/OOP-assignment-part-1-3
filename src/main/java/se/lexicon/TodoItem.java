@@ -130,16 +130,12 @@ public class TodoItem {
 
         TodoItem todoItem = (TodoItem) obj;
 
-        return done == todoItem.done && title.equals(todoItem.title) && taskDescription.equals(todoItem.taskDescription) && deadLine.equals(todoItem.deadLine);
+        return id == todoItem.id;
     }
 
     @Override
     public int hashCode() {
-        int result = title.hashCode();
-        result = 31 * result + taskDescription.hashCode();
-        result = 31 * result + deadLine.hashCode();
-        result = 31 * result + Boolean.hashCode(done);
-        return result;
+        return Integer.hashCode(id);
     }
 
 

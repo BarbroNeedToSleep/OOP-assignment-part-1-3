@@ -86,15 +86,13 @@ public class Person {
 
         Person person = (Person) obj;
 
-        return firstName.equals(person.firstName) && lastName.equals(person.lastName) && email.equals(person.email);
+        // Compare only IDs
+        return this.id == person.id;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + email.hashCode();
-        return result;
+        return Integer.hashCode(id);
     }
 
 

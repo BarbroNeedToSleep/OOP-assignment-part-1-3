@@ -200,5 +200,14 @@ public class TodoItemTest {
         Assertions.assertEquals(expected, summary);
     }
 
+    @Test
+    void twoTodoItemsWithSameDataButDifferentIdsShouldNotBeEqual() {
+
+        TodoItem first = new TodoItem("Test", "Desc", LocalDate.now().plusDays(1), person);
+        TodoItem second = new TodoItem("Test", "Desc", LocalDate.now().plusDays(1), person);
+
+        Assertions.assertNotEquals(first, second, "Even with same content, IDs differ so they are not equal");
+    }
+
 
 }
