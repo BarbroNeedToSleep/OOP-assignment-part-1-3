@@ -1,13 +1,14 @@
 package se.lexicon;
 
+import se.lexicon.idSequencer.PersonIdSequencer;
+import se.lexicon.idSequencer.ToDoItemIdSequencer;
+
 import java.time.LocalDate;
 
 public class TodoItem {
 
-    private  static int itemID =0;
 
-
-    private int ID;
+    private int id;
     private String title;
     private String taskDescription;
     private LocalDate deadLine;
@@ -16,7 +17,7 @@ public class TodoItem {
 
     public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator){
 
-        this.ID = getNextItemID();
+        this.id = ToDoItemIdSequencer.getInstance().nextId();
         setTitle(title);
         setTaskDescription(taskDescription);
         setDeadLine(deadLine);
@@ -26,8 +27,7 @@ public class TodoItem {
     }
 
     // Getters
-    private int getNextItemID(){
-        return ++itemID;}
+
 
     public String getTitle(){
         return title;
@@ -102,7 +102,7 @@ public class TodoItem {
 
         StringBuilder info = new StringBuilder();
         info.append("Job: ").append(title)
-                .append(", Id number: ").append(ID)
+                .append(", Id number: ").append(id)
                 .append(" Overdue: ").append(done ? "Yes" : "No");
 
         return info.toString();
@@ -112,7 +112,7 @@ public class TodoItem {
     public String toString(){
 
         StringBuilder info = new StringBuilder();
-        info.append("Booking information -  Id number: ").append(ID)
+        info.append("Booking information -  Id number: ").append(id)
                 .append(", Job : ").append(title)
                 .append(", Job description: ").append(taskDescription)
                 .append(", Due date: ").append(deadLine)
@@ -147,11 +147,11 @@ public class TodoItem {
 
     // Testing Utilities
 
-    public int getID (){
-        return ID;
+    public int getId (){
+        return id;
     }
 
-    public static void resetIdCounterForTesting() {
-        itemID  = 0;
-    }
+//    public static void resetIdCounterForTesting() {
+//        itemId  = 0;
+//    }
 }

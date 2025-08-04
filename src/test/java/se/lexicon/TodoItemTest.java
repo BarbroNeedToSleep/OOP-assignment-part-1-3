@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.idSequencer.PersonIdSequencer;
+import se.lexicon.idSequencer.ToDoItemIdSequencer;
 
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ public class TodoItemTest {
 
     @BeforeEach
     public void setup() {
-        TodoItem.resetIdCounterForTesting();
+        ToDoItemIdSequencer.getInstance().reset();
         PersonIdSequencer.getInstance().reset();
         person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
         todoItem = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-09-30"), person);
@@ -165,7 +166,7 @@ public class TodoItemTest {
 
         int expected = 1;
 
-        int actualValue = todoItem.getID();
+        int actualValue = todoItem.getId();
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
@@ -174,7 +175,7 @@ public class TodoItemTest {
 
         int expected02 = 2;
 
-        int actualValue02 = secondTodo.getID();
+        int actualValue02 = secondTodo.getId();
 
         Assertions.assertEquals(expected02, actualValue02, "The maximum value should be 2");
 
@@ -189,7 +190,7 @@ public class TodoItemTest {
 
         String summary = todoItem.toString();
 
-        String expected = "Booking information -  Id number: " + todoItem.getID()
+        String expected = "Booking information -  Id number: " + todoItem.getId()
                 + ", Job : Change tire"
                 + ", Job description: Change both tires on the front"
                 + ", Due date: 2025-09-30"

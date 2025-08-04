@@ -13,8 +13,6 @@ public class PersonTest {
     public void setup() {
 
         PersonIdSequencer.getInstance().reset();
-
-
         person = new Person("Lina", "Katt", "lina@example.se", new AppUser("Lina", "123", AppRole.ROLE_APP_USER));
     }
 
@@ -152,7 +150,7 @@ public class PersonTest {
 
         int expected = 1;
 
-        int actualValue = person.getID();
+        int actualValue = person.getId();
 
         Assertions.assertEquals(expected, actualValue, "The maximum value should be 1");
 
@@ -160,7 +158,7 @@ public class PersonTest {
 
         int expected02 = 2;
 
-        int actualValue02 = personTest01.getID();
+        int actualValue02 = personTest01.getId();
 
         Assertions.assertEquals(expected02, actualValue02, "The maximum value should be 2");
 
@@ -171,7 +169,7 @@ public class PersonTest {
 
         //Scenario: Return the value of the summery created of the Person
 
-        int id = person.getID();
+        int id = person.getId();
         String expected = "Person Info- ID: " + id + ", Name: Lina Katt, Email : lina@example.se";
 
         String actual = person.toString();

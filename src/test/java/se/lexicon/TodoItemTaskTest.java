@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.idSequencer.PersonIdSequencer;
+import se.lexicon.idSequencer.ToDoItemIdSequencer;
 
 import java.time.LocalDate;
 
@@ -15,7 +16,7 @@ public class TodoItemTaskTest {
 
     @BeforeEach
     public void setup() {
-        TodoItem.resetIdCounterForTesting();
+        ToDoItemIdSequencer.getInstance().reset();
         PersonIdSequencer.getInstance().reset();
         TodoItemTask.resetIdCounterForTesting();
         person = new Person("jon", "Jonsson", "jon@test.se", new AppUser("Jon", "13399", AppRole.ROLE_APP_USER));

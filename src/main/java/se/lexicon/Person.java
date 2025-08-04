@@ -100,7 +100,7 @@ public class Person {
 
     // Testing Utilities
 
-    public int getID (){
+    public int getId (){
         return id;
     }
 
