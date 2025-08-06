@@ -6,6 +6,8 @@ import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 import se.lexicon.model.TodoItemTask;
+import se.lexicon.personDAO.PersonDAO;
+import se.lexicon.personDAO.PersonDAOCollection;
 
 import java.time.LocalDate;
 
@@ -14,56 +16,15 @@ public class Main {
     public static void main(String[] args) {
 
 
-    Person lina = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER));
-    Person alfred = new Person("Alfred", "Katt", "Alfred@exempel.se", AppUser.getInstance("Alfred", "1abc", AppRole.ROLE_APP_USER));
-    Person jon = new Person("Jon", "Jonsson", "jon@exemle.se", AppUser.getInstance("Jon", "13399", AppRole.ROLE_APP_USER));
-
-    System.out.println(lina);
-    System.out.println(jon);
-    System.out.println(alfred +"\n");
-
-    Person p1 = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("l", "2", AppRole.ROLE_APP_USER));
-    Person p2 = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("k", "3", AppRole.ROLE_APP_USER));
-
-    System.out.println(p1.equals(p2));
-
-    TodoItem tire = new TodoItem("Change tire", "Change both tires on the front", LocalDate.parse("2025-11-11"), lina);
-    TodoItem windshield = new TodoItem("Replace windshield", "Replace windshield after damage, Covered by insurance", LocalDate.parse("2025-11-11"), alfred);
-
-    System.out.println(tire);
-    System.out.println(windshield+"\n");
-
-    System.out.println(tire.getOverdueInfo());
-    System.out.println(windshield.getOverdueInfo()+"\n");
-
-    Person creator = new Person("Lina", "Katt", "lina@exempel.se", AppUser.getInstance("Lina01", "123", AppRole.ROLE_APP_USER));
-
-    TodoItem item1 = new TodoItem("Clean", "Clean the garage", LocalDate.now().plusDays(2), creator);
-    TodoItem item2 = new TodoItem("Clean", "Clean the garage", LocalDate.now().plusDays(2), creator);
-
-    System.out.println("item1.equals(item2): " + item1.equals(item2));  // should be true
-        System.out.println("item1.hashCode(): " + item1.hashCode());
-        System.out.println("item2.hashCode(): " + item2.hashCode()+"\n");
-
-    TodoItemTask fixTire = new TodoItemTask(tire, jon);
-    TodoItemTask fixWindshield = new TodoItemTask(windshield, jon);
-
-    System.out.println(fixTire);
-    System.out.println(fixWindshield +"\n");
-
-    AppUser barbro = AppUser.getInstance("NtS","321", AppRole.ROLE_APP_USER);
-    System.out.println(barbro.toString());
-
-    AppUser user1 = AppUser.getInstance("Alice", "pass123", AppRole.ROLE_APP_USER);
-    AppUser user2 = AppUser.getInstance("Alice01", "diffPass", AppRole.ROLE_APP_USER);
-    AppUser user3 = AppUser.getInstance("Bob", "bobPass", AppRole.ROLE_APP_ADMIN);
+//        AppUser user = AppUser.getInstance("testuser", "password123", AppRole.ROLE_APP_USER);
+        Person person = Person.createPerson("Lina", "Andersson", "lina@test.se", AppUser.getInstance("testUser","123",AppRole.ROLE_APP_USER));
 
 
-    System.out.println("user1: " + user1);
-    System.out.println("user3: " + user3);
+        System.out.println(person);
 
-        System.out.println("user1 equals user3? " + user1.equals(user3)); // false
-
+        AppUser credentials = person.getCredentials();
+        System.out.println("Username: " + credentials.getUserName());
+        System.out.println("Role: " + credentials.getRole());
     }
 
 }

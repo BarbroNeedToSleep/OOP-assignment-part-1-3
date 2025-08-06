@@ -2,21 +2,43 @@ package se.lexicon.model;
 
 import se.lexicon.idSequencer.PersonIdSequencer;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Person {
 
+    private static final Set<String> emails = new HashSet<>();
 
-    private int id;
+    private final int id;
     private String firstName;
     private String lastName;
     private String email;
     private AppUser credentials;
 
-    public Person(String firstName, String lastName, String email, AppUser credentials){
+
+    private Person(String firstName, String lastName, String email, AppUser credentials){
         this.id = PersonIdSequencer.getInstance().nextId();
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
         setCredentials(credentials);
+    }
+
+    public static Person createPerson(String firstName, String lastName, String email, AppUser credentials) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+
+        String normalizedEmail = email.trim().toLowerCase();
+
+        synchronized (emails) {
+            if (emails.contains(normalizedEmail)) {
+                throw new IllegalArgumentException("Email already exists: " + normalizedEmail);
+            }
+            emails.add(normalizedEmail);
+        }
+
+        return new Person(firstName, lastName, normalizedEmail, credentials);
     }
 
     //Setters
@@ -37,14 +59,14 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public void setEmail(String email){
+   private void setEmail(String email){
         if (email == null || email.trim().isEmpty()){
             throw new IllegalArgumentException("Email cannot be null or empty");
         }
         this.email = email;
     }
 
-    public void setCredentials(AppUser credentials) {
+ private void setCredentials(AppUser credentials) {
 
         if (credentials == null){
             throw new IllegalArgumentException("Credentials cannot be null");
@@ -66,6 +88,12 @@ public class Person {
 
     public AppUser getCredentials() {
         return credentials;
+    }
+
+    public static void removeEmail(String email) {
+        synchronized (emails) {
+            emails.remove(email.toLowerCase().trim());
+        }
     }
 
     @Override
