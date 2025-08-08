@@ -1,4 +1,4 @@
-package se.lexicon.idSequencer;
+package se.lexicon.dao.idSequencer;
 
 public class ToDoItemIdSequencer {
 

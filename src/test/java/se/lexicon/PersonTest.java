@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
-import se.lexicon.idSequencer.PersonIdSequencer;
+import se.lexicon.dao.idSequencer.PersonIdSequencer;
 import se.lexicon.model.Person;
 
 public class PersonTest {

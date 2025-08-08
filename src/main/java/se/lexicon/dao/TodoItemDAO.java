@@ -1,4 +1,4 @@
-package se.lexicon.todoItemDAO;
+package se.lexicon.dao;
 
 import se.lexicon.model.TodoItem;
 

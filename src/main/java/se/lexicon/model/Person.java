@@ -1,6 +1,6 @@
 package se.lexicon.model;
 
-import se.lexicon.idSequencer.PersonIdSequencer;
+import se.lexicon.dao.idSequencer.PersonIdSequencer;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -5,10 +5,7 @@ import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
-import se.lexicon.model.TodoItemTask;
-import se.lexicon.personDAO.PersonDAO;
-import se.lexicon.personDAO.PersonDAOCollection;
-import se.lexicon.todoItemDAO.TodoItemDAOCollection;
+import se.lexicon.dao.impl.TodoItemDAOCollection;
 
 import java.time.LocalDate;
 

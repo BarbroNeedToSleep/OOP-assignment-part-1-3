@@ -1,4 +1,4 @@
-package se.lexicon.personDAO;
+package se.lexicon.dao;
 
 import se.lexicon.model.Person;
 

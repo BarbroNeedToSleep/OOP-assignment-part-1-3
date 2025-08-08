@@ -1,14 +1,14 @@
-package se.lexicon.idSequencer;
+package se.lexicon.dao.idSequencer;
 
-public class ToDoItemTaskIdSequencer {
+public class PersonIdSequencer {
 
     private int currentId = 0;
 
-    private static final ToDoItemTaskIdSequencer INSTANCE = new ToDoItemTaskIdSequencer();
+    private static final PersonIdSequencer INSTANCE = new PersonIdSequencer();
 
-    private ToDoItemTaskIdSequencer() {}
+    private PersonIdSequencer() {}
 
-    public static ToDoItemTaskIdSequencer getInstance() {
+    public static PersonIdSequencer getInstance() {
         return INSTANCE;
     }
 

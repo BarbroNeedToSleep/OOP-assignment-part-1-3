@@ -1,6 +1,7 @@
-package se.lexicon.todoItemDAO;
+package se.lexicon.dao.impl;
 
 
+import se.lexicon.dao.TodoItemDAO;
 import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TodoItemDAOCollection implements TodoItemDAO{
+public class TodoItemDAOCollection implements TodoItemDAO {
 
     private List<TodoItem> todoItems = new ArrayList<>();
 

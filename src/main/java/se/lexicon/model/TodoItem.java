@@ -1,6 +1,6 @@
 package se.lexicon.model;
 
-import se.lexicon.idSequencer.ToDoItemIdSequencer;
+import se.lexicon.dao.idSequencer.ToDoItemIdSequencer;
 
 import java.time.LocalDate;
 

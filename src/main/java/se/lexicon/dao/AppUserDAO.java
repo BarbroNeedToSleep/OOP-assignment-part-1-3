@@ -1,4 +1,4 @@
-package se.lexicon.appUserDAO;
+package se.lexicon.dao;
 
 import se.lexicon.model.AppUser;
 
