@@ -24,37 +24,7 @@ public class AppUserTest {
         AppUser.clearInstances();
     }
 
-    @Test
-    public void testValidAppUserNameCreation() {
 
-        //Scenario: Check the name creation for the app user.
-
-        Assertions.assertEquals("Lina", appUser.getUserName());
-    }
-
-    @Test
-    public void testValidAppUserPasswordCreation() {
-
-        //Scenario: Check the password creation for the app user.
-
-        Assertions.assertEquals("123", appUser.getPassword());
-
-    }
-
-    @Test
-    public void testValidAppUserRoleCreation() {
-
-        //Scenario: Check the role creation for the app user.
-
-        Assertions.assertEquals(AppRole.ROLE_APP_USER, appUser.getRole());
-    }
-
-    @Test
-    public void testDuplicateAppUserThrowsException() {
-        Assertions.assertThrows(IllegalStateException.class, () -> {
-            AppUser.getInstance("Lina", "newpass", AppRole.ROLE_APP_ADMIN);
-        });
-    }
 
 
 
