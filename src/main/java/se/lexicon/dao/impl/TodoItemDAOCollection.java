@@ -2,6 +2,7 @@ package se.lexicon.dao.impl;
 
 
 import se.lexicon.dao.TodoItemDAO;
+import se.lexicon.model.Person;
 import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
@@ -61,19 +62,49 @@ public class TodoItemDAOCollection implements TodoItemDAO {
 
     @Override
     public List<TodoItem> findByTitleContains(String title) {
-        return todoItems.stream()
-                .filter(item -> item.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .collect(Collectors.toList());
+
+        if (title == null || title.trim().isEmpty()){
+            throw new IllegalArgumentException("Titel cannot be null or empty.");
+        }
+
+        String lowerCaseTitle = title.toLowerCase();
+        List<TodoItem> foundItems = new ArrayList<>();
+
+        for (TodoItem todoItem : todoItems) {
+            if (todoItem.getTitle().toLowerCase().contains(lowerCaseTitle)) {
+                foundItems.add(todoItem);
+            }
+        }
+
+        if (foundItems.isEmpty()) {
+            System.out.println("No title containing the search was found.");
+        }
+
+        return foundItems;
     }
 
 
     @Override
     public List<TodoItem> findByPersonId(Integer id) {
 
-        return todoItems.stream()
-                .filter(item -> item.getCreator() != null &&
-                        Objects.equals(item.getCreator().getId(), id))
-                .collect(Collectors.toList());
+
+        if (id == null || id <= 0){
+            throw new IllegalArgumentException("Id cannot be null or negative.");
+        }
+
+        List<TodoItem> foundPersonIds = new ArrayList<>();
+
+        for (TodoItem todoItem : todoItems) {
+            if (todoItem.getCreator() != null && todoItem.getCreator().getId() == id) {
+                foundPersonIds.add(todoItem);
+            }
+        }
+
+        if (foundPersonIds.isEmpty()) {
+            System.out.println("No person with that id was found.");
+        }
+
+        return foundPersonIds;
     }
 
 

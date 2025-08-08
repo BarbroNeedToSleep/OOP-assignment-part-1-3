@@ -15,8 +15,9 @@ public class TodoItemTask {
 public TodoItemTask(TodoItem todoItem, Person assignee){
 
     this.id = ToDoItemTaskIdSequencer.getInstance().nextId();
-    this.todoItem = todoItem;
-    setAssignee(assignee);
+    setTodoItem(todoItem);  // reuse validation here
+    this.assignee = assignee; // null allowed
+    setAssigned();
 
 
 }
@@ -47,14 +48,10 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
     }
 
     public void setAssignee(Person assignee) {
-
-        if (assignee == null) {
-            throw new IllegalArgumentException("Assignee cannot be null");
-        }
-
-        this.assignee = assignee;
+        this.assignee = assignee; // null allowed so it can be sett later
         setAssigned();
     }
+
 
      public void setTodoItem(TodoItem todoItem) {
 
@@ -70,8 +67,9 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
         StringBuilder summary = new StringBuilder();
         summary.append("Task ID: ").append(id)
                 .append(", Task: ").append(todoItem.toString())
-                .append(", Is assigned to ").append(assignee.getFirstName());
-        return summary.toString();
+                .append(", Is assigned to ").append(assignee != null ? assignee.getFirstName() : "No one");
+
+         return summary.toString();
     }
 
     @Override
