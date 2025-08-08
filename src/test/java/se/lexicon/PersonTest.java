@@ -8,23 +8,34 @@ import se.lexicon.model.Person;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PersonTest {
 
     private Person person;
     private AppUser appUser;
 
+    @BeforeAll
+    public void beforeAll() {
+        PersonIdSequencer.getInstance().reset();
+        AppUser.clearInstances();
+        appUser = AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER);
+    }
+
     @BeforeEach
     public void setup() {
-
-        PersonIdSequencer.getInstance().reset();
-        appUser = AppUser.getInstance("Lina", "123", AppRole.ROLE_APP_USER);
-        person = Person.createPerson("Lina", "Katt", "lina@example.se",appUser);
+        // Create a fresh Person for each test
+        person = Person.createPerson("Lina", "Katt", "lina@example.se", appUser);
     }
 
     @AfterEach
     public void tearDown() {
-        AppUser.clearInstances();
+        // Remove email to prevent duplicates in following tests
         Person.removeEmail("lina@example.se");
+    }
+
+    @AfterAll
+    public void afterAll() {
+        AppUser.clearInstances();
     }
 
     @Test

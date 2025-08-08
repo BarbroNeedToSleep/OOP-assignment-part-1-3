@@ -31,6 +31,7 @@ public class AppUser {
     public static boolean hasUser(String userName) {
         return instances.containsKey(userName);
     }
+
     public static AppUser getInstance(String userName, String password, AppRole role) {
         if (instances.containsKey(userName)) {
             throw new IllegalStateException("AppUser with username '" + userName + "' already exists.");
