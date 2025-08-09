@@ -1,10 +1,7 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.model.AppRole;
-import se.lexicon.model.AppUser;
 import se.lexicon.dao.idSequencer.PersonIdSequencer;
-import se.lexicon.model.Person;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,18 +1,17 @@
-package se.lexicon;
+package se.lexicon.dao.idSequencer;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.dao.idSequencer.ToDoItemIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class ToDoItemIdSequencerTest {
+public class ToDoItemTaskIdSequencerTest {
 
-    private ToDoItemIdSequencer sequencer;
+    private ToDoItemTaskIdSequencer sequencer;
 
     @BeforeAll
     public void beforeAll() {
-        sequencer = ToDoItemIdSequencer.getInstance();
+        sequencer = ToDoItemTaskIdSequencer.getInstance();
         sequencer.reset();
     }
 

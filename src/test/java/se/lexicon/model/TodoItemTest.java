@@ -1,10 +1,6 @@
-package se.lexicon;
+package se.lexicon.model;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.model.Person;
-import se.lexicon.model.TodoItem;
-import se.lexicon.model.AppUser;
-import se.lexicon.model.AppRole;
 import se.lexicon.dao.idSequencer.PersonIdSequencer;
 
 import java.lang.reflect.Field;

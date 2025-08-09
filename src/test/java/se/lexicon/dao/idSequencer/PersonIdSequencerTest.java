@@ -1,7 +1,6 @@
-package se.lexicon;
+package se.lexicon.dao.idSequencer;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.dao.idSequencer.PersonIdSequencer;
 
 import static org.junit.jupiter.api.Assertions.*;
 
