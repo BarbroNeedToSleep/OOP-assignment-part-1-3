@@ -5,7 +5,7 @@ import se.lexicon.dao.idSequencer.ToDoItemTaskIdSequencer;
 
 public class TodoItemTask {
 
-//    private  static int itemTaskID =0;
+
 
     private int id;
     private boolean assigned;
