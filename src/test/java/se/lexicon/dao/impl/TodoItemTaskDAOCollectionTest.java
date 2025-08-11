@@ -1,7 +1,7 @@
 package se.lexicon.dao.impl;
 
 import org.junit.jupiter.api.*;
-import se.lexicon.dao.impl.TodoItemTaskDAOCollection;
+
 import se.lexicon.model.AppRole;
 import se.lexicon.model.AppUser;
 import se.lexicon.model.Person;

@@ -2,14 +2,14 @@ package se.lexicon.dao.impl;
 
 
 import se.lexicon.dao.TodoItemDAO;
-import se.lexicon.model.Person;
+
 import se.lexicon.model.TodoItem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+
 import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements TodoItemDAO {

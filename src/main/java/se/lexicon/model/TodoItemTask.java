@@ -14,7 +14,7 @@ public class TodoItemTask {
 public TodoItemTask(TodoItem todoItem, Person assignee){
 
     this.id = ToDoItemTaskIdSequencer.getInstance().nextId();
-    setTodoItem(todoItem);  // reuse validation here
+    setTodoItem(todoItem);
     this.assignee = assignee; // null allowed
     setAssigned();
 
@@ -88,7 +88,7 @@ public TodoItemTask(TodoItem todoItem, Person assignee){
         int result = id;
         result = 31 * result + (assigned ? 1 : 0);
         result = 31 * result + (todoItem != null ? todoItem.hashCode() : 0);
-        // Exclude assignee
+
         return result;
     }
 

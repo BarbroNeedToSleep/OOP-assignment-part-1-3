@@ -114,7 +114,7 @@ public class Person {
 
         Person person = (Person) obj;
 
-        // Compare only IDs
+
         return this.id == person.id;
     }
 
