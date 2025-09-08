@@ -1,7 +1,5 @@
 package se.lexicon.model;
 
-import se.lexicon.dao.idSequencer.ToDoItemIdSequencer;
-
 import java.time.LocalDate;
 
 public class TodoItem {
@@ -12,18 +10,27 @@ public class TodoItem {
     private String taskDescription;
     private LocalDate deadLine;
     private boolean done = false;
-    private Person creator;
+    private int creator;
 
-    public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator){
+    public TodoItem(int id, String title, String taskDescription, LocalDate deadLine, int creator){
 
-        this.id = ToDoItemIdSequencer.getInstance().nextId();
+        this.id = id;
         setTitle(title);
         setTaskDescription(taskDescription);
         setDeadLine(deadLine);
-        setCreator(creator);
-
+        this.creator = creator;
 
     }
+
+    public TodoItem(String title, String taskDescription, LocalDate deadLine, int creator){
+
+        setTitle(title);
+        setTaskDescription(taskDescription);
+        setDeadLine(deadLine);
+        this.creator = creator;
+
+    }
+
 
     // Getters
 
@@ -44,7 +51,7 @@ public class TodoItem {
         return done;
     }
 
-    public Person getCreator() {
+    public int getCreator() {
         return creator;
     }
 
@@ -85,11 +92,10 @@ public class TodoItem {
         this.done = done;
     }
 
-    public void setCreator(Person creator) {
-        if (creator == null ){
-            throw new IllegalArgumentException("Creator cannot be null");
+    public void setCreator(int creator) {
+        if (creator < 0) {  // negative IDs are invalid
+            throw new IllegalArgumentException("Creator cannot be negative");
         }
-
         this.creator = creator;
     }
 
@@ -107,43 +113,23 @@ public class TodoItem {
         return info.toString();
     }
 
-    @Override
-    public String toString(){
 
-        StringBuilder info = new StringBuilder();
-        info.append("Booking information -  Id number: ").append(id)
-                .append(", Job : ").append(title)
-                .append(", Job description: ").append(taskDescription)
-                .append(", Due date: ").append(deadLine)
-                .append(", Done: ").append(done ? "Yes" : "No")
-                .append(", Customer ").append(creator.getFirstName());
-
-
-        return info.toString();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        TodoItem todoItem = (TodoItem) obj;
-
-        return id == todoItem.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(id);
-    }
-
-
-
-
-    // Testing Utilities
-
-    public int getId (){
-        return id;
-    }
+    //TODO fix code after findById is done
+//    @Override
+//    public String toString() {
+//        // Suppose you have a personDAO available
+//        Person person = "classdoaIMplhere)".findById(creator).orElse(null);
+//        String customerName = (person != null) ? person.getFirstName() : "N/A";
+//
+//        StringBuilder info = new StringBuilder();
+//        info.append("Booking information - Id number: ").append(id)
+//                .append(", Job: ").append(title)
+//                .append(", Job description: ").append(taskDescription)
+//                .append(", Due date: ").append(deadLine)
+//                .append(", Done: ").append(done ? "Yes" : "No")
+//                .append(", Customer: ").append(customerName);
+//
+//        return info.toString();
+//    }
 
 }
