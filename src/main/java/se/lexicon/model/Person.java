@@ -14,7 +14,7 @@ public class Person {
         setLastName(lastName);
     }
 
-    private Person(int id, String firstName, String lastName){
+    public Person(int id, String firstName, String lastName){
         this.id = id;
         setFirstName(firstName);
         setLastName(lastName);
@@ -56,15 +56,5 @@ public class Person {
         return lastName;
     }
 
-
-    @Override
-    public String toString(){
-        StringBuilder summary = new StringBuilder();
-        summary.append("Person Info- ID: ").append(id)
-                .append(", Name: ").append(firstName)
-                .append(" ").append(lastName);
-        return summary.toString();
-
-    }
 
 }
