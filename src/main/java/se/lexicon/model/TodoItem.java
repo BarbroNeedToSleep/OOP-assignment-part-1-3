@@ -107,5 +107,17 @@ public class TodoItem {
         this.creator = creator;
     }
 
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", deadLine=" + deadLine +
+                ", done=" + done +
+                ", creator=" + creator +
+                '}';
+    }
+
 
 }

@@ -16,7 +16,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public TodoItem create(TodoItem todoItem) {
 
-        String sql = "INSERT INTO todoItem (title, description, deadline, done, assignee_id ) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO todo_item (title, description, deadline, done, assignee_id ) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -55,7 +55,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     public Collection<TodoItem> findAll() {
 
         List<TodoItem> todoItemsList = new ArrayList<>();
-        String sql = "SELECT id, title, description, deadline, done, assignee_id FROM todoItem";
+        String sql = "SELECT todo_id, title, description, deadline, done, assignee_id FROM todo_item";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -64,7 +64,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
                 while (resultSet.next()) {
 
                     TodoItem todoItem = new TodoItem (
-                            resultSet.getInt("id"),
+                            resultSet.getInt("todo_id"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
                             resultSet.getDate("deadline").toLocalDate(),
@@ -89,7 +89,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public TodoItem findById(int id) {
 
-        String sql = "SELECT id, title, description, deadline, done, assignee_id FROM todoItem WHERE id = ?";
+        String sql = "SELECT todo_id, title, description, deadline, done, assignee_id FROM todo_item WHERE todo_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -99,7 +99,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     TodoItem todoItem = new TodoItem (
-                            resultSet.getInt("id"),
+                            resultSet.getInt("todo_id"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
                             resultSet.getDate("deadline").toLocalDate(),
@@ -123,7 +123,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public Collection<TodoItem> findByDoneStatus(boolean done) {
         List<TodoItem> todoItemsList = new ArrayList<>();
-        String sql = "SELECT id, title, description, deadline, done, assignee_id FROM todoItem WHERE done = ?";
+        String sql = "SELECT todo_id, title, description, deadline, done, assignee_id FROM todo_item WHERE done = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -133,7 +133,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     TodoItem todoItem = new TodoItem(
-                            resultSet.getInt("id"),
+                            resultSet.getInt("todo_id"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
                             resultSet.getDate("deadline").toLocalDate(),
@@ -157,7 +157,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public Collection<TodoItem> findByAssignee(int id) {
         List<TodoItem> todoItemsList = new ArrayList<>();
-        String sql = "SELECT id, title, description, deadline, done, assignee_id FROM todoItem WHERE assignee_id = ?";
+        String sql = "SELECT todo_id, title, description, deadline, done, assignee_id FROM todo_item WHERE assignee_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -167,7 +167,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     TodoItem todoItem = new TodoItem(
-                            resultSet.getInt("id"),
+                            resultSet.getInt("todo_id"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
                             resultSet.getDate("deadline").toLocalDate(),
@@ -201,7 +201,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public Collection<TodoItem> findByUnassignedTodoItems() {
         List<TodoItem> todoItemsList = new ArrayList<>();
-        String sql = "SELECT id, title, description, deadline, done, assignee_id FROM todoItem WHERE assignee_id IS NULL";
+        String sql = "SELECT todo_id, title, description, deadline, done, assignee_id FROM todo_item WHERE assignee_id IS NULL";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -209,7 +209,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     TodoItem todoItem = new TodoItem(
-                            resultSet.getInt("id"),
+                            resultSet.getInt("todo_id"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
                             resultSet.getDate("deadline").toLocalDate(),
@@ -234,7 +234,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public TodoItem update(TodoItem todoItem) {
 
-        String sql = "UPDATE todoItem SET title = ?, description = ?, deadline = ?, done = ?, assignee_id = ? WHERE id = ?";
+        String sql = "UPDATE todo_item SET title = ?, description = ?, deadline = ?, done = ?, assignee_id = ? WHERE todo_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -268,7 +268,7 @@ public class TodoItemsDAOImpl implements TodoItemsDAO {
     @Override
     public boolean deleteById(int id) {
 
-        String sql = "DELETE FROM todoItem WHERE id = ?";
+        String sql = "DELETE FROM todo_item WHERE todo_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

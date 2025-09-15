@@ -13,7 +13,7 @@ public class PeopleDAOImpl implements PeopleDAO {
 
     @Override
     public Person create(Person person) {
-        String sql = "INSERT INTO person (firstName, lastName ) VALUES (?, ?)";
+        String sql = "INSERT INTO person (first_name, last_name ) VALUES (?, ?)";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -48,7 +48,7 @@ public class PeopleDAOImpl implements PeopleDAO {
     public Collection<Person> findAll() {
 
         List<Person> personList = new ArrayList<>();
-        String sql = "SELECT id, firstName, lastName FROM person";
+        String sql = "SELECT person_id, first_name, last_name FROM person";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -56,9 +56,9 @@ public class PeopleDAOImpl implements PeopleDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Person person= new Person (
-                            resultSet.getInt("id"),
-                            resultSet.getString("firstName"),
-                            resultSet.getString("lastName")
+                            resultSet.getInt("person_id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name")
 
                     );
 
@@ -79,7 +79,7 @@ public class PeopleDAOImpl implements PeopleDAO {
     @Override
     public Person findById(int id) {
 
-        String sql = "SELECT id, firstname, lastName FROM person WHERE id = ?";
+        String sql = "SELECT person_id, first_name, last_name FROM person WHERE person_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -89,9 +89,9 @@ public class PeopleDAOImpl implements PeopleDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Person person = new Person(
-                            resultSet.getInt("id"),
-                            resultSet.getString("firstName"),
-                            resultSet.getString("lastName")
+                            resultSet.getInt("person_id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name")
                     );
                     return person;
                 }
@@ -114,7 +114,7 @@ public class PeopleDAOImpl implements PeopleDAO {
 
         String searchName = "%" + name.trim().toLowerCase() + "%";
 
-        String sql = "SELECT id, firstName, lastName FROM person WHERE LOWER(firstName) LIKE ? OR LOWER(lastName) LIKE ?";
+        String sql = "SELECT person_id, first_name, last_name FROM person WHERE LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -126,9 +126,9 @@ public class PeopleDAOImpl implements PeopleDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Person person = new Person(
-                            resultSet.getInt("id"),
-                            resultSet.getString("firstName"),
-                            resultSet.getString("lastName")
+                            resultSet.getInt("person_id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name")
                     );
 
                     personList02.add(person);
@@ -148,7 +148,7 @@ public class PeopleDAOImpl implements PeopleDAO {
     @Override
     public Person update(Person person) {
 
-        String sql = "UPDATE person SET firstName = ?, lastName = ? WHERE id = ?";
+        String sql = "UPDATE person SET first_name= ?, last_name = ? WHERE person_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -178,7 +178,7 @@ public class PeopleDAOImpl implements PeopleDAO {
     @Override
     public boolean deleteById(int id) {
 
-        String sql = "DELETE FROM person WHERE id = ?";
+        String sql = "DELETE FROM person WHERE person_id = ?";
 
         try (Connection connection = MySQLDatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

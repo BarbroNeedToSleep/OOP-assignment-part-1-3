@@ -9,7 +9,7 @@ public class Person {
     private String lastName;
 
 
-    private Person(String firstName, String lastName){
+    public Person(String firstName, String lastName){
         setFirstName(firstName);
         setLastName(lastName);
     }
@@ -56,5 +56,13 @@ public class Person {
         return lastName;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
 }
